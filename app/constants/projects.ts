@@ -8,8 +8,14 @@ export const PROJECTS: Project[] = [
     url: 'https://github.com/kunal9812/cybersecurity_framework-DTI',
   },
   {
+    title: 'ATM Simulator',
+    date: 'Nov 2025',
+    subtext: 'Console-based ATM simulator in C++ demonstrating OOP — encapsulation, constructors, static members, and file I/O for persistent account storage',
+    url: 'https://github.com/kunal9812/ATM_Simulator-OOPS_Project',
+  },
+  {
     title: 'Healthcare Management System',
-    date: 'Mar 2025',
+    date: 'Apr 2026',
     subtext: 'Relational DB system with a 9-table schema, full 3NF normalization, and Role-Based Access Control (RBAC) using PostgreSQL with 4 distinct roles.',
   },
   {
@@ -22,6 +28,7 @@ export const PROJECTS: Project[] = [
     title: 'Custom Command-Line Shell',
     date: 'Apr 2026',
     subtext: 'A custom Unix shell built in C++ supporting piping, I/O redirection, background processes, and built-in commands. Containerized with Docker.',
+    url: 'https://github.com/kunal9812/Custom-Command-Line-Shell-OS-PBL',
   },
   {
     title: 'p4lang/behavioral-model',

@@ -1,12 +1,14 @@
 import * as THREE from "three";
 import { WorkTimelinePoint } from "../types";
 
+const CURRENT_YEAR = String(new Date().getUTCFullYear());
+
 // TODO: Update with your actual education and work history
 export const WORK_TIMELINE: WorkTimelinePoint[] = [
   {
     point: new THREE.Vector3(0, 0, 0),
     year: '2024',
-    title: 'MRU',
+    title: 'Manav Rachna University',
     subtitle: 'Computer Science',
     position: 'right',
   },
@@ -26,7 +28,7 @@ export const WORK_TIMELINE: WorkTimelinePoint[] = [
   },
   {
     point: new THREE.Vector3(1, 1, -12),
-    year: new Date().toLocaleDateString('default', { year: 'numeric' }),
+    year: CURRENT_YEAR,
     title: '?',
     subtitle: '???',
     position: 'right',

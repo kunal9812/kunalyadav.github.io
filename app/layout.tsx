@@ -16,6 +16,16 @@ const vercettiFont = localFont({
 export const metadata: Metadata = {
   title: "Kunal Yadav ✌️",
   description: "CS student and developer — building systems, solving problems, contributing to open source.",
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   keywords: "Kunal Yadav, CS Student, Systems Developer, C++, Android, Kotlin, Open Source, Portfolio, Three.js, React",
   authors: [{ name: "Kunal Yadav" }],
   creator: "Kunal Yadav",
@@ -63,8 +73,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="overscroll-y-none">
+    <html lang="en" className="overscroll-y-none" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${soriaFont.variable} ${vercettiFont.variable} font-sans antialiased`}
       >
         {children}
