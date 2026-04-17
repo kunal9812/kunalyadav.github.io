@@ -17,6 +17,57 @@ interface ProjectTileProps {
   onClick: () => void;
 }
 
+const formatProjectTitle = (title: string, maxCharsPerLine = 14, maxLines = 3) => {
+  const tokens = title
+    .replace(/[/-]/g, "$& ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  const lines: string[] = [];
+  let currentLine = "";
+  let truncated = false;
+
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    const candidate = currentLine ? `${currentLine} ${token}` : token;
+
+    if (candidate.length <= maxCharsPerLine) {
+      currentLine = candidate;
+      continue;
+    }
+
+    if (currentLine) {
+      lines.push(currentLine);
+      currentLine = token;
+    } else {
+      lines.push(token.slice(0, maxCharsPerLine));
+      currentLine = token.slice(maxCharsPerLine);
+    }
+
+    if (lines.length === maxLines) {
+      truncated = true;
+      break;
+    }
+  }
+
+  if (!truncated && currentLine && lines.length < maxLines) {
+    lines.push(currentLine);
+  }
+
+  if (lines.length > maxLines) {
+    lines.length = maxLines;
+    truncated = true;
+  }
+
+  if (truncated && lines.length) {
+    const last = lines[lines.length - 1].trim();
+    lines[lines.length - 1] = `${last.slice(0, Math.max(1, maxCharsPerLine - 1)).trim()}…`;
+  }
+
+  return lines.join("\n");
+};
+
 const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: ProjectTileProps) => {
   const projectRef = useRef<THREE.Group>(null);
   const hoverAnimRef = useRef<gsap.core.Timeline | null>(null);
@@ -34,6 +85,8 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
     anchorX: "left",
     anchorY: "top",
   }), []);
+
+  const titleText = useMemo(() => formatProjectTitle(project.title), [project.title]);
 
   useEffect(() => {
     if (!projectRef.current) return;
@@ -110,9 +163,12 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
           position={[-1.9, -0.8, 0.101]}
           anchorX="left"
           anchorY="bottom"
-          maxWidth={4}
-          fontSize={0.8}>
-          {project.title}
+          maxWidth={3.6}
+          overflowWrap="break-word"
+          whiteSpace="normal"
+          lineHeight={1.05}
+          fontSize={0.56}>
+          {titleText}
         </Text>
         <group position={[-1.25, 1.4, 0.01]}>
           <mesh>
